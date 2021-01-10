@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { dbService } from 'fBase';
 
-const Home = () => {
+const Home = ({ userObj }) => {
   const [feed, setFeed] = useState('');
   const [feeds, setFeeds] = useState([]);
+  useEffect(() => {
+    dbService.collection('feeds').onSnapshot((snapshot) => {
+      const feedArray = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      setFeeds(feedArray);
+    });
+  }, []);
   const getFeeds = async () => {
     const dbFeeds = await dbService.collection('feeds').get();
     dbFeeds.forEach((document) => {
@@ -14,15 +20,13 @@ const Home = () => {
       setFeeds((prev) => [feedObject, ...prev]);
     });
   };
-  useEffect(() => {
-    getFeeds();
-  }, []);
 
   const onSubmit = async (e) => {
     e.preventDefault();
     await dbService.collection('feeds').add({
-      feed,
+      text: feed,
       createdAt: Date.now(),
+      creatorId: userObj.uid,
     });
     setFeed('');
   };
@@ -50,7 +54,7 @@ const Home = () => {
       <div>
         {feeds.map((feed) => (
           <div key={feed.id}>
-            <h4>{feed.feed}</h4>
+            <h4>{feed.text}</h4>
           </div>
         ))}
       </div>
