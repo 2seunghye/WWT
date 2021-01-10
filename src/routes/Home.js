@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
+import { dbService } from 'fBase';
 
 const Home = () => {
   const [feed, setFeed] = useState('');
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+    await dbService.collection('feeds').add({
+      feed,
+      createdAt: Date.now(),
+    });
+    setFeed('');
   };
 
   const onChange = (e) => {
