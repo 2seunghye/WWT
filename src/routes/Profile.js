@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { authService, dbService } from 'fBase';
 import { useHistory } from 'react-router-dom';
 
-export default ({ userObj }) => {
+export default ({ refreshUser, userObj }) => {
   const history = useHistory();
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
 
@@ -25,6 +25,7 @@ export default ({ userObj }) => {
       await userObj.updateProfile({
         displayName: newDisplayName,
       });
+      refreshUser();
     }
   };
 
