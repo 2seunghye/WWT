@@ -28,15 +28,22 @@ const Home = ({ userObj }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const fileRef = storageService.ref().child(`${userObj.uid}/${uuidv4()}`);
-    const response = await fileRef.putString(attachment, 'data_url');
-    console.log(response);
-    // await dbService.collection('feeds').add({
-    //   text: feed,
-    //   createdAt: Date.now(),
-    //   creatorId: userObj.uid,
-    // });
-    // setFeed('');
+    let attachmentUrl = '';
+    if (attachmentUrl != '') {
+      const attachmentRef = storageService.ref().child(`${userObj.uid}/${uuidv4()}`);
+      const response = await attachmentRef.putString(attachment, 'data_url');
+      const attachmentUrl = await response.ref.getDownloadURL();
+    }
+
+    const feedObj = {
+      text: feed,
+      createdAt: Date.now(),
+      creatorId: userObj.uid,
+      attachmentUrl,
+    };
+    await dbService.collection('feeds').add(feedObj);
+    setFeed('');
+    setAttachment('');
   };
 
   const onChange = (e) => {

@@ -45,6 +45,7 @@ const Feed = ({ feedObj, isOwner }) => {
       ) : (
         <>
           <h4>{feedObj.text}</h4>
+          {feedObj.attachmentUrl && <img src={feedObj.attachmentUrl} width="150px" />}
           {isOwner && (
             <>
               <button onClick={onDeleteClick}>Delete Feed</button>
