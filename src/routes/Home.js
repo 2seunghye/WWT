@@ -6,7 +6,7 @@ import Feed from 'components/Feed';
 const Home = ({ userObj }) => {
   const [feed, setFeed] = useState('');
   const [feeds, setFeeds] = useState([]);
-  const [attachment, setAttachment] = useState();
+  const [attachment, setAttachment] = useState('');
 
   useEffect(() => {
     dbService.collection('feeds').onSnapshot((snapshot) => {
