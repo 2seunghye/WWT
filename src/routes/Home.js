@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { dbService } from 'fBase';
+import { v4 as uuidv4 } from 'uuid';
+import { dbService, storageService } from 'fBase';
 import Feed from 'components/Feed';
 
 const Home = ({ userObj }) => {
@@ -27,12 +28,15 @@ const Home = ({ userObj }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await dbService.collection('feeds').add({
-      text: feed,
-      createdAt: Date.now(),
-      creatorId: userObj.uid,
-    });
-    setFeed('');
+    const fileRef = storageService.ref().child(`${userObj.uid}/${uuidv4()}`);
+    const response = await fileRef.putString(attachment, 'data_url');
+    console.log(response);
+    // await dbService.collection('feeds').add({
+    //   text: feed,
+    //   createdAt: Date.now(),
+    //   creatorId: userObj.uid,
+    // });
+    // setFeed('');
   };
 
   const onChange = (e) => {
