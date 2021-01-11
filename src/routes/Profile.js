@@ -1,14 +1,33 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { authService, dbService } from 'fBase';
 import { useHistory } from 'react-router-dom';
 
 export default ({ userObj }) => {
   const history = useHistory();
+  const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
 
   const onLogOutClick = () => {
     authService.signOut();
     history.push('/');
   };
+
+  const onChange = (e) => {
+    const {
+      target: { value },
+    } = e;
+    setNewDisplayName(value);
+  };
+
+  const onSubmit = async (e) => {
+    // 사진 업로드도 해보기
+    e.preventDefault();
+    if (userObj.displayName !== newDisplayName) {
+      await userObj.updateProfile({
+        displayName: newDisplayName,
+      });
+    }
+  };
+
   const getMyFeeds = async () => {
     const feeds = await dbService.collection('feeds').where('creatorId', '==', userObj.uid).orderBy('createdAt').get();
   };
@@ -17,6 +36,10 @@ export default ({ userObj }) => {
   }, []);
   return (
     <>
+      <form onSubmit={onSubmit}>
+        <input type="text" placeholder="Display name" value={newDisplayName} onChange={onChange} />
+        <input type="submit" value="Update Profile" />
+      </form>
       <button onClick={onLogOutClick}>Log Out</button>
     </>
   );
