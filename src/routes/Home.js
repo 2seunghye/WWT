@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { dbService } from 'fBase';
+import Feed from 'components/Feed';
 
 const Home = ({ userObj }) => {
   const [feed, setFeed] = useState('');
@@ -14,8 +15,8 @@ const Home = ({ userObj }) => {
     const dbFeeds = await dbService.collection('feeds').get();
     dbFeeds.forEach((document) => {
       const feedObject = {
-        ...document.data(),
         id: document.id,
+        ...document.data(),
       };
       setFeeds((prev) => [feedObject, ...prev]);
     });
@@ -53,9 +54,7 @@ const Home = ({ userObj }) => {
       </form>
       <div>
         {feeds.map((feed) => (
-          <div key={feed.id}>
-            <h4>{feed.text}</h4>
-          </div>
+          <Feed key={feed.id} feedObj={feed} isOwner={feed.creatorId === userObj.uid} />
         ))}
       </div>
     </div>
