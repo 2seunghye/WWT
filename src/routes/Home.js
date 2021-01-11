@@ -29,12 +29,11 @@ const Home = ({ userObj }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     let attachmentUrl = '';
-    if (attachmentUrl != '') {
+    if (attachment !== '') {
       const attachmentRef = storageService.ref().child(`${userObj.uid}/${uuidv4()}`);
       const response = await attachmentRef.putString(attachment, 'data_url');
-      const attachmentUrl = await response.ref.getDownloadURL();
+      attachmentUrl = await response.ref.getDownloadURL();
     }
-
     const feedObj = {
       text: feed,
       createdAt: Date.now(),

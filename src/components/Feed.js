@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { dbService } from 'fBase';
+import { dbService, storageService } from 'fBase';
 
 const Feed = ({ feedObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
@@ -11,6 +11,7 @@ const Feed = ({ feedObj, isOwner }) => {
     if (ok) {
       //delete
       await dbService.doc(`feeds/${feedObj.id}`).delete();
+      await storageService.refFromURL(feedObj.attachmentUrl).delete();
     }
   };
 
