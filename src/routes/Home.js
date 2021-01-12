@@ -15,11 +15,11 @@ const Home = ({ userObj }) => {
     });
   }, []);
   return (
-    <div>
+    <div className="container">
       <FeedFactory userObj={userObj} />
-      <div>
+      <div style={{ marginTop: 30 }}>
         {feeds.map((feed) => (
-          <Feed key={feed.id} feedObj={feed} isOwner={feed.creatorId === userObj.uid} />
+          <Feed key={feed.id} feedObj={feed} isOwner={feed.creatorId === userObj.uid} userObj={userObj} />
         ))}
       </div>
     </div>

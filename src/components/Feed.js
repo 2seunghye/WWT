@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { dbService, storageService } from 'fBase';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const Feed = ({ feedObj, isOwner }) => {
+import { faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+
+const Feed = ({ feedObj, isOwner, userObj }) => {
   const [editing, setEditing] = useState(false);
   const [newFeed, setNewFeed] = useState(feedObj.text);
 
   const onDeleteClick = async () => {
-    const ok = window.confirm('Are you sure you want to delete this feed?');
+    const ok = window.confirm('이 게시물을 삭제하시겠습니까?');
     console.log(ok);
     if (ok) {
       //delete
@@ -34,24 +37,37 @@ const Feed = ({ feedObj, isOwner }) => {
   };
 
   return (
-    <div>
+    <div className="feed">
       {editing ? (
         <>
-          <form onSubmit={onSubmit}>
-            <input type="text" placeholder="Edit your feed" value={newFeed} onChange={onChange} required />
-            <input type="submit" value="Update Feed" />
+          <form onSubmit={onSubmit} className="container feedEdit">
+            <input type="text" placeholder="Edit your feed" value={newFeed} onChange={onChange} required autoFocus className="formInput" />
+            <input type="submit" value="Update Feed" className="formBtn" />
           </form>
-          <button onClick={toggleEditing}>Cancel</button>
+          <span onClick={toggleEditing} className="formBtn cancelBtn">
+            Cancel
+          </span>
         </>
       ) : (
         <>
-          <h4>{feedObj.text}</h4>
-          {feedObj.attachmentUrl && <img src={feedObj.attachmentUrl} width="150px" />}
+          {feedObj.attachmentUrl && <img src={feedObj.attachmentUrl} />}
+
           {isOwner && (
-            <>
-              <button onClick={onDeleteClick}>Delete Feed</button>
-              <button onClick={toggleEditing}>Edit Feed</button>
-            </>
+            <div class="feed__content">
+              <h4>{feedObj.text}</h4>
+              <div className="feed__info">
+                <span>{new Date().toLocaleDateString().slice(0, -1) + ' ' + new Date().toLocaleTimeString().slice(0, -3)}</span>
+                <span>by {userObj.displayName}</span>
+              </div>
+              <div className="feed__actions">
+                <span onClick={toggleEditing}>
+                  <FontAwesomeIcon icon={faPencilAlt} />
+                </span>
+                <span onClick={onDeleteClick}>
+                  <FontAwesomeIcon icon={faTrash} />
+                </span>
+              </div>
+            </div>
           )}
         </>
       )}

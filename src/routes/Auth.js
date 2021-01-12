@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTwitter, faGoogle, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { authService, firebaseInstance } from '../fBase';
 import AuthForm from 'components/AuthForm';
 
@@ -17,14 +19,14 @@ const Auth = () => {
   };
 
   return (
-    <div>
+    <div className="authContainer">
       <AuthForm />
-      <div>
-        <button name="github" onClick={onSocialClick}>
-          Continue with Github
+      <div className="authBtns">
+        <button onClick={onSocialClick} name="google" className="authBtn">
+          Continue with Google <FontAwesomeIcon icon={faGoogle} />
         </button>
-        <button name="google" onClick={onSocialClick}>
-          Continue with Google
+        <button onClick={onSocialClick} name="github" className="authBtn">
+          Continue with Github <FontAwesomeIcon icon={faGithub} />
         </button>
       </div>
     </div>
