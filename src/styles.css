@@ -46,6 +46,15 @@ nav ul li:hover a {
   transition: ease-in-out 0.4s;
 }
 
+.alert {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  color: rgb(133, 61, 48);
+  font-size: 11px;
+  font-weight: 500;
+}
+
 .feed-input::placeholder {
   color: white;
   opacity: 0.9;
@@ -53,9 +62,11 @@ nav ul li:hover a {
 
 .container {
   width: 100%;
-  max-width: 320px;
+  max-width: 960px;
   display: flex;
+  justify-content: center;
   flex-direction: column;
+  align-items: center;
 }
 
 .formInput {
@@ -65,7 +76,7 @@ nav ul li:hover a {
   border: 1px solid #a0998e;
   text-align: center;
   background-color: white;
-  color: #a0998 e;
+  color: #a0998e;
 }
 
 .formBtn {
@@ -90,11 +101,13 @@ nav ul li:hover a {
   border-bottom: 1px solid rgba(255, 255, 255, 0.9);
   padding-bottom: 30px;
   width: 100%;
+  max-width: 320px;
   display: flex;
   flex-direction: column;
 }
 
 .logOut {
+  max-width: 320px;
   margin-top: 50px;
 }
 
@@ -103,8 +116,9 @@ nav ul li:hover a {
 .factoryForm {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 320px;
 }
 
 .factoryForm p {
@@ -129,7 +143,7 @@ nav ul li:hover a {
   color: #fafafa;
   border: 1px solid #fafafa;
   border-radius: 20px;
-  font-weight: 500;
+  font-weight: 450;
   font-size: 12px;
 }
 
@@ -195,7 +209,7 @@ nav ul li:hover a {
   margin-bottom: 20px;
   background-color: white;
   width: 100%;
-  max-width: 320px;
+  max-width: 350px;
   padding: 10px;
   border-radius: 10px;
   position: relative;
@@ -218,12 +232,21 @@ nav ul li:hover a {
   padding: 10px;
 }
 
+.feed__container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  color: red;
+}
+
 .feed__content {
   background-color: white;
   width: 100%;
-  max-width: 320px;
-  padding: 20px 20px 40px 20px;
-
+  height: 100%;
+  max-width: 350px;
+  padding: 20px;
   border-radius: 10px;
   position: relative;
   display: flex;
@@ -252,7 +275,7 @@ nav ul li:hover a {
 .feed__actions {
   position: absolute;
   right: 20px;
-  bottom: 10px;
+  bottom: 5px;
 }
 
 .feed__actions span {
@@ -316,7 +339,7 @@ nav ul li:hover a {
 .authError {
   color: tomato;
   text-align: center;
-  font-weight: 500;
+  font-weight: 450;
   font-size: 12px;
 }
 

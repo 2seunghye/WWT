@@ -51,24 +51,24 @@ const Feed = ({ feedObj, isOwner, userObj }) => {
       ) : (
         <>
           {feedObj.attachmentUrl && <img src={feedObj.attachmentUrl} />}
-
-          {isOwner && (
-            <div class="feed__content">
-              <h4>{feedObj.text}</h4>
-              <div className="feed__info">
-                <span>{new Date().toLocaleDateString().slice(0, -1) + ' ' + new Date().toLocaleTimeString().slice(0, -3)}</span>
-                <span>by {userObj.displayName}</span>
-              </div>
-              <div className="feed__actions">
-                <span onClick={toggleEditing}>
-                  <FontAwesomeIcon icon={faPencilAlt} />
-                </span>
-                <span onClick={onDeleteClick}>
-                  <FontAwesomeIcon icon={faTrash} />
-                </span>
-              </div>
+          <div className="feed__content">
+            <h4>{feedObj.text}</h4>
+            <div className="feed__info">
+              <span>{new Date().toLocaleDateString().slice(0, -1) + ' ' + new Date().toLocaleTimeString().slice(0, -3)}</span>
+              {/* <span>by {feedObj ? feedObj.creatorId : 'someone'}</span> */}
+              <span>by anonymous</span>
+              {isOwner && (
+                <div className="feed__actions">
+                  <span onClick={toggleEditing}>
+                    <FontAwesomeIcon icon={faPencilAlt} />
+                  </span>
+                  <span onClick={onDeleteClick}>
+                    <FontAwesomeIcon icon={faTrash} />
+                  </span>
+                </div>
+              )}
             </div>
-          )}
+          </div>
         </>
       )}
     </div>

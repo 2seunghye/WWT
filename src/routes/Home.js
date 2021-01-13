@@ -12,12 +12,14 @@ const Home = ({ userObj }) => {
         ...doc.data(),
       }));
       setFeeds(feedArray);
+      console.log(userObj);
     });
   }, []);
+
   return (
     <div className="container">
       <FeedFactory userObj={userObj} />
-      <div style={{ marginTop: 30 }}>
+      <div className="feed__container" style={{ marginTop: 30 }}>
         {feeds.map((feed) => (
           <Feed key={feed.id} feedObj={feed} isOwner={feed.creatorId === userObj.uid} userObj={userObj} />
         ))}

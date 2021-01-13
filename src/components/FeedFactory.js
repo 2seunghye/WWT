@@ -57,7 +57,8 @@ const FeedFactory = ({ userObj }) => {
 
   return (
     <form onSubmit={onSubmit} className="factoryForm">
-      <p>Welcome {userObj.displayName}!</p>
+      <p>Welcome {userObj ? userObj.displayName : ' '}!</p>
+
       <div className="factoryInput__container">
         <input
           className="factoryInput__input"
