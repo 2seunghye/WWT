@@ -5,6 +5,7 @@ What are you wearing today?
 [https://2seunghye.github.io/WWT/#/](https://2seunghye.github.io/WWT/#/)
 
 ## Function 
+- Mobile optimization
 - Feed CRUD
 - Email, Google, Github.. Social Authentication
 - Profile Page
