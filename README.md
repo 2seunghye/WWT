@@ -1,6 +1,6 @@
-** 코드는 master branch에서 확인가능합니다. **
+코드는 master branch에서 확인가능합니다.
 
-# WWT
+# 👗 WWT
 What are you wearing today?
 
 ## URL
